@@ -1,0 +1,87 @@
+<div>    
+    <table cellspacing="0" rules="cols" id="ctl00_mainContent_ctl01_gvFuture" style="background-color:White;border-color:Gainsboro;border-width:1px;border-style:solid;width:100%;border-collapse:collapse;">
+        <tr class="gvHeader">
+            <th scope="col">
+                <span id="ctl00_mainContent_ctl01_gvFuture_ctl02_lblTime_f" class="tableBarText">TIME</span>
+            </th>
+            <th align="left" scope="col">
+                <span id="ctl00_mainContent_ctl01_gvFuture_ctl02_lblVisitingTeam_f" class="tableBarTextNoPadding">VISITING TEAM</span>
+            </th>
+            <th align="left" scope="col">
+                <span id="ctl00_mainContent_ctl01_gvFuture_ctl02_lblScore" class="tableBarTextNoPadding">SCORE</span>
+            </th>
+            <th align="left" scope="col">
+                <span id="ctl00_mainContent_ctl01_gvFuture_ctl02_lblHomeTeam_f" class="tableBarTextNoPadding">HOME TEAM</span>
+            </th>
+            <th align="left" scope="col">
+                <span id="ctl00_mainContent_ctl01_gvFuture_ctl02_Label1" class="tableBarTextNoPadding">SCORE</span>
+            </th>
+            <th align="left" scope="col">
+                <span id="ctl00_mainContent_ctl01_gvFuture_ctl02_lblEvent_f" class="tableBarTextNoPadding">EVENT</span>
+            </th>
+            <th align="left" scope="col">
+                <span id="ctl00_mainContent_ctl01_gvFuture_ctl02_lblLocation_f" class="tableBarTextNoPadding">LOCATION</span>
+            </th>
+        </tr>
+        <tr class="gvRow" style="color:#FFFFFF;background-color:#B0B0B0;font-weight:bold;height:40px;">
+            <td colspan="7">&nbsp;&nbsp;Thursday, September 12, 2019</td>
+        </tr>
+        <tr class="gvRow" style="background-color:White;">
+            <td class="gvItem" style="width:10%;">
+                                            07:00 PM
+            </td>
+            <td class="gvItem" align="left" style="width:17%;">
+                <a id="ctl00_mainContent_ctl01_gvFuture_ctl03_hylVisitingTeam_f" class="gvlink" href="https://canlanaisl.icesports.com/BURNABY8RINKS/schedule-team.aspx?genderId=&amp;did=483&amp;sport_id=45&amp;sid=733&amp;tid=4150">Degenerates FC</a>
+            </td>
+            <td class="gvItem" align="left" style="width:10%;">
+                <div class="tableContentTextNoPadding">
+                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+            </td>
+            <td class="gvItem" align="left" style="width:18%;">
+                <a id="ctl00_mainContent_ctl01_gvFuture_ctl03_hylHomeTeam" class="gvlink" href="https://canlanaisl.icesports.com/BURNABY8RINKS/schedule-team.aspx?genderId=&amp;did=483&amp;sport_id=45&amp;sid=733&amp;tid=4153">Megpies FC</a>
+            </td>
+            <td class="gvItem" align="left" style="width:10%;">
+                <div class="tableContentTextNoPadding">
+                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+            </td>
+            <td class="gvItem" align="left" style="width:10%;">
+                                            Soccer
+            </td>
+            <td class="gvItem" align="left" style="width:25%;">
+                                            Burnaby Indoor Soccer Centre
+            </td>
+        </tr>
+        <tr class="gvRow" style="color:#FFFFFF;background-color:#B0B0B0;font-weight:bold;height:40px;">
+            <td colspan="7">&nbsp;&nbsp;Thursday, September 19, 2019</td>
+        </tr>
+        <tr class="gvAlterRow" style="background-color:#E5E5E5;">
+            <td class="gvItem" style="width:10%;">
+                                            07:00 PM
+            </td>
+            <td class="gvItem" align="left" style="width:17%;">
+                <a id="ctl00_mainContent_ctl01_gvFuture_ctl05_hylVisitingTeam_f" class="gvlink" href="https://canlanaisl.icesports.com/BURNABY8RINKS/schedule-team.aspx?genderId=&amp;did=483&amp;sport_id=45&amp;sid=733&amp;tid=4153">Megpies FC</a>
+            </td>
+            <td class="gvItem" align="left" style="width:10%;">
+                <div class="tableContentTextNoPadding">
+                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+            </td>
+            <td class="gvItem" align="left" style="width:18%;">
+                <a id="ctl00_mainContent_ctl01_gvFuture_ctl05_hylHomeTeam" class="gvlink" href="https://canlanaisl.icesports.com/BURNABY8RINKS/schedule-team.aspx?genderId=&amp;did=483&amp;sport_id=45&amp;sid=733&amp;tid=4152">Croatia U21</a>
+            </td>
+            <td class="gvItem" align="left" style="width:10%;">
+                <div class="tableContentTextNoPadding">
+                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+            </td>
+            <td class="gvItem" align="left" style="width:10%;">
+                                            Soccer
+            </td>
+            <td class="gvItem" align="left" style="width:25%;">
+                                            Burnaby Indoor Soccer Centre
+            </td>
+        </tr>
+    </table>
+</div>
