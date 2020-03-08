@@ -18,7 +18,7 @@ import (
 
 func init() {
 	log.SetFormatter(&log.JSONFormatter{})
-	log.SetLevel(log.DebugLevel)
+	log.SetLevel(log.InfoLevel)
 }
 
 func main() {
@@ -76,13 +76,16 @@ func main() {
 		os.Exit(1)
 	}
 
-	log.Infof("Games: %v", games)
+	for _, g := range games {
+		log.Infof("game: %+v", g)
+	}
+
 }
 
 type game struct {
-	startTime time.Time
-	opponent  string
-	location  string
+	StartTime time.Time
+	Opponent  string
+	Location  string
 }
 
 func getGames(teamID string, seasonID string, viewStateInfo ViewStateInfo, cookies []*http.Cookie) ([]game, error) {
@@ -153,41 +156,95 @@ func getGames(teamID string, seasonID string, viewStateInfo ViewStateInfo, cooki
 	}
 	defer resp.Body.Close()
 
-	bodyBytes, _ := ioutil.ReadAll(resp.Body)
+	/*
+		bodyBytes, _ := ioutil.ReadAll(resp.Body)
 
-	log.Debugf("Response to post: %s", string(bodyBytes))
+		log.Debugf("Response to post: %s", string(bodyBytes))
 
-	s := string(bodyBytes)
+		s := string(bodyBytes)
 
-	// Find the dates in order
-	dateIdxs := findDaysOfWeek(s)
-	var dateStrs []string
-	for _, dateIdx := range dateIdxs {
-		dateEndIdx := strings.Index(s[dateIdx:], "<")
-		dateStr := s[dateIdx : dateIdx+dateEndIdx]
-		dateStrs = append(dateStrs, dateStr)
-	}
-
-	// Find the times in order
-	timeIdxs := findTime(s, dateIdxs)
-	var timeStrs []string
-	for _, timeIdx := range timeIdxs {
-		timeStr := s[timeIdx-6 : timeIdx+2]
-		timeStrs = append(timeStrs, timeStr)
-	}
-
-	// Parse dates and times to time.Time
-	timeLayout := "Monday, January 2, 2006, 03:04 PM MST"
-	for i, dateStr := range dateStrs {
-		dateTimeStr := dateStr + ", " + timeStrs[i] + " PST"
-		t, err := time.Parse(timeLayout, dateTimeStr)
-		if err != nil {
-			return nil, fmt.Errorf("error parsing times, %d, %v", i, err)
+		// Find the dates in order
+		dateIdxs := findDaysOfWeek(s)
+		var dateStrs []string
+		for _, dateIdx := range dateIdxs {
+			dateEndIdx := strings.Index(s[dateIdx:], "<")
+			dateStr := s[dateIdx : dateIdx+dateEndIdx]
+			dateStrs = append(dateStrs, dateStr)
 		}
-		log.Infof("Game Times: %v \n", t)
-	}
 
-	return nil, nil
+		// Find the times in order
+		timeIdxs := findTime(s, dateIdxs)
+		var timeStrs []string
+		for _, timeIdx := range timeIdxs {
+			timeStr := s[timeIdx-6 : timeIdx+2]
+			timeStrs = append(timeStrs, timeStr)
+		}
+
+		// Parse dates and times to time.Time
+		var games []game
+		/*
+			timeLayout := "Monday, January 2, 2006, 03:04 PM MST"
+			for i, dateStr := range dateStrs {
+				dateTimeStr := dateStr + ", " + timeStrs[i] + " PST"
+				t, err := time.Parse(timeLayout, dateTimeStr)
+				if err != nil {
+					return nil, fmt.Errorf("error parsing times, %d, %v", i, err)
+				}
+				games = append(games, game{StartTime: t})
+			}
+	*/
+	games := getAllGames(resp)
+
+	return games, nil
+}
+
+func getAllGames(resp *http.Response) []game {
+
+	var games []game
+	z := html.NewTokenizer(resp.Body)
+	for {
+		tt := z.Next()
+		switch tt {
+		case html.ErrorToken:
+			log.Info("error token")
+			return nil
+		case html.StartTagToken:
+			name, hasAttr := z.TagName()
+			if string(name) == "td" && hasAttr {
+				key, _, _ := z.TagAttr()
+				if string(key) == "colspan" {
+					log.Infof("Found colspan")
+					for {
+						tk := z.Next()
+						if tk == html.TextToken {
+							text := z.Text()
+							timeLayout := "  Monday, January 2, 2006, 03:04 PM MST"
+							dateTimeStr := dateStr + ", " + timeStrs[i] + " PST"
+								t, err := time.Parse(timeLayout, dateTimeStr)
+								if err != nil {
+									fmt.Printf("ERROR parsing times, %d, %v \n", i, err)
+									return
+								}
+								fmt.Printf("time: %v \n", t)
+
+							for i, dateStr := range dateStrs {
+								dateTimeStr := dateStr + ", " + timeStrs[i] + " PST"
+								t, err := time.Parse(timeLayout, dateTimeStr)
+								if err != nil {
+									fmt.Printf("ERROR parsing times, %d, %v \n", i, err)
+									return
+								}
+								fmt.Printf("time: %v \n", t)
+							}
+							log.Infof("game date: %s", text)
+							break
+						}
+					}
+				}
+			}
+		}
+	}
+	return games
 }
 
 func getSoccerSchedule() (*http.Response, error) {
@@ -417,7 +474,7 @@ func getTeamID(teamName string, scheduleResp *http.Response) (string, error) {
 	}
 
 	// Parse dates and times to time.Time
-	timeLayout := "Monday, January 2, 2006, 03:04 PM MST"
+	timeLayout := "  Monday, January 2, 2006, 03:04 PM MST"
 	for i, dateStr := range dateStrs {
 		dateTimeStr := dateStr + ", " + timeStrs[i] + " PST"
 		t, err := time.Parse(timeLayout, dateTimeStr)
